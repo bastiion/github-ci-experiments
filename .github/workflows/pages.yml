@@ -21,6 +21,7 @@ concurrency:
 jobs:
   # Build job
   build:
+    environment: production
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -36,11 +37,16 @@ jobs:
           </head>
           <body>
             <h1>GitHub CI Experiments</h1>
+               <p>This is a test of GitHub CI.</p>
+          <ul>
+            <li>repository: ${{ github.repository }}</li>
+            <li>actor: ${{ github.actor }}</li>
+            <li>sha: ${{ github.sha }}</li>
+            <li>${{ vars.GREETING }}</li>
+            <li>${{ secrets.SECRET_GREETING }}</li>
+          </ul>
           </body>
           </html>
-          first line
-          second line
-          third line
           EOF
           )
           echo "$MY_STRING" > _site/index.html
